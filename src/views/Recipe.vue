@@ -1,5 +1,6 @@
 <template>
-  <v-container fluid>
+<div class='recipe'>
+<v-container fluid>
     <v-row dense>
       <v-col v-for="recipe in recipes" :key="recipe.id">
         <router-link :to="`/recipe/${recipe.id}`">
@@ -24,14 +25,12 @@
       </v-col>
     </v-row>
   </v-container>
+</div>
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue';
-
 export default {
-  name: 'home',
+  name: 'recipe',
   components: {
     // HelloWorld
   },
@@ -40,8 +39,8 @@ export default {
         recipes: [
           {
             id: 1,
-            title: 'interior01',
-            imgSrc: require('../assets/i-01.jpg')
+            title: 'recipe01',
+            imgSrc: require('../assets/r-01.jpg')
           },
           {
             id: 2,
@@ -50,43 +49,8 @@ export default {
           },
           {
             id: 3,
-            title: 'battle01',
-            imgSrc: require('../assets/b-01.jpg')
-          },
-          {
-            id: 4,
-            title: 'recipe04',
-            imgSrc: require('../assets/r-04.jpg')
-          },
-          {
-            id: 5,
-            title: 'interior03',
-            imgSrc: require('../assets/i-03.jpg')
-          },
-          {
-            id: 6,
-            title: 'battle02',
-            imgSrc: require('../assets/b-02.jpg')
-          },
-          {
-            id: 7,
-            title: 'recipe01',
-            imgSrc: require('../assets/r-01.jpg')
-          },
-          {
-            id: 8,
-            title: 'interior04',
-            imgSrc: require('../assets/i-04.jpg')
-          },
-          {
-            id: 9,
             title: 'recipe03',
             imgSrc: require('../assets/r-03.jpg')
-          },
-          {
-            id: 10,
-            title: 'interior02',
-            imgSrc: require('../assets/i-02.jpg')
           },
         ]
       }
