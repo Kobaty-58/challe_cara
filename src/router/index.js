@@ -4,6 +4,8 @@ import Home from '../views/Home.vue'
 import RecipeDetail from '../views/RecipeDetail.vue'
 import Recipe from '../views/Recipe.vue'
 import Post from '../views/Post.vue'
+import Detail from '../views/Detail.vue'
+import Battle from '../views/Battle.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +29,16 @@ const routes = [
     path: '/post',
     name: 'post',
     component: Post
+  },
+  {
+    path: '/detail/:id',
+    name: 'detail',
+    component: Detail
+  },
+  {
+    path: '/battle',
+    name: 'battle',
+    component: Battle
   },
   {
     path: '/about',
