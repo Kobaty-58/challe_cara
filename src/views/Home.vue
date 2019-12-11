@@ -1,11 +1,11 @@
 <template>
   <v-container fluid>
     <v-row dense>
-      <v-col v-for="recipe in recipes" :key="recipe.id">
-        <router-link :to="`/recipe/${recipe.id}`">
+      <v-col v-for="detail in details" :key="detail.id">
+        <router-link :to="`/detail/${detail.id}`">
           <v-card>
-            <v-img :src="recipe.imgSrc" class="white--text align-end" width="350px" height="300px">
-              <v-card-title v-text="recipe.title"></v-card-title>
+            <v-img :src="detail.imgSrc" class="white--text align-end" width="350px" height="300px">
+              <v-card-title v-text="detail.title"></v-card-title>
             </v-img>
             <v-card-actions>
               <v-btn icon>
@@ -37,7 +37,7 @@ export default {
   },
   data: () => {
     return {
-        recipes: [
+        details: [
           {
             id: 1,
             title: 'interior01',

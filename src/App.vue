@@ -25,14 +25,16 @@
           </v-list-item>
         </router-link>
 
-        <v-list-item link>
-          <v-list-item-action>
-            <v-icon large color="green lighten-1">mdi-trophy</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Battle</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+        <router-link :to="'/battle'">
+          <v-list-item link>
+            <v-list-item-action>
+              <v-icon large color="green lighten-1">mdi-trophy</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Battle</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </router-link>
 
         <v-list-item link>
           <v-list-item-action>
