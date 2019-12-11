@@ -6,6 +6,8 @@ import Recipe from '../views/Recipe.vue'
 import Post from '../views/Post.vue'
 import Detail from '../views/Detail.vue'
 import Battle from '../views/Battle.vue'
+import Interior from '../views/Interior.vue'
+import InteriorDetail from '../views/InteriorDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -39,6 +41,16 @@ const routes = [
     path: '/battle',
     name: 'battle',
     component: Battle
+  },
+  {
+    path: '/interior',
+    name: 'interior',
+    component: Interior
+  },
+  {
+    path: '/interior/:id',
+    name: 'interior-detail',
+    component: InteriorDetail
   },
   {
     path: '/about',
