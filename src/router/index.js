@@ -8,6 +8,10 @@ import Detail from '../views/Detail.vue'
 import Battle from '../views/Battle.vue'
 import Interior from '../views/Interior.vue'
 import InteriorDetail from '../views/InteriorDetail.vue'
+import BattleResult from '../views/BattleResult.vue'
+import BattleDetail from '../views/BattleDetail.vue'
+import BattleResultBlue from '../views/BattleResultBlue.vue'
+import BattleResultRed from '../views/BattleResultRed.vue'
 
 Vue.use(VueRouter)
 
@@ -51,6 +55,26 @@ const routes = [
     path: '/interior/:id',
     name: 'interior-detail',
     component: InteriorDetail
+  },
+  {
+    path: '/battle-result',
+    name: 'battle-result',
+    component: BattleResult
+  },
+  {
+    path: '/battle-detail',
+    name: 'battle-detail',
+    component: BattleDetail
+  },
+  {
+    path: '/battle-result-blue',
+    name: 'battle-result-blue',
+    component: BattleResultBlue
+  },
+  {
+    path: '/battle-result-red',
+    name: 'battle-result-red',
+    component: BattleResultRed
   },
   {
     path: '/about',

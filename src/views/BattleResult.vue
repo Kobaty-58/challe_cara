@@ -5,19 +5,18 @@
       <v-col cols="12" sm="6">
         <div class="text-center">
           <div class="my-2">
-            <v-btn color="#A0E0F0" dark large>battle</v-btn>
-            <router-link :to="'/battle-result'">
-              <v-btn color="#F0F080" dark large>result</v-btn>
+            <router-link :to="'/battle'">
+                <v-btn color="#A0E0F0" dark large>battle</v-btn>
             </router-link>
+            <v-btn color="#F0F080" dark large>result</v-btn>
           </div>
           </div>
       </v-col>
     </v-row>
     <v-col v-for="n of 10" :key="n"><!--とりあえず１０回-->
-    <router-link :to="'/battle-detail'">
     <v-card
       class="mx-auto"
-      color="#A0E0F0"
+      color="#F0F080"
       dark
       max-width="400"
     >
@@ -45,7 +44,6 @@
       </v-list-item>
     </v-card-actions>
   </v-card>
-    </router-link>
     </v-col>
 </v-container>
 </template>
