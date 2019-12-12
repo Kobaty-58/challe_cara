@@ -24,10 +24,10 @@
     <v-col cols="12" sm="6">
       <div class="text-center">
         <div class="my-2">
-          <router-link :to="'/battle-result-red'">
+          <router-link :to="'/in-battle-red'">
             <v-btn color="red" dark large>RED</v-btn>
           </router-link>
-          <router-link :to="'/battle-result-blue'">
+          <router-link :to="'/in-battle-blue'">
             <v-btn color="#0000ff" dark large>BLUE</v-btn>
           </router-link>
         </div>
