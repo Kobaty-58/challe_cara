@@ -9,7 +9,7 @@
               <v-card-title v-text="photo.title"></v-card-title>
 
             </v-img>
-          </router-link>
+          
           <v-card-actions>
             <v-btn icon>
               <v-icon>mdi-heart</v-icon>
@@ -22,7 +22,8 @@
               <v-icon>mdi-share-variant</v-icon>
             </v-btn>
           </v-card-actions>
-        </v-card>
+          </v-card>
+          </router-link>
       </v-col>
     </v-row>
   </v-container>
