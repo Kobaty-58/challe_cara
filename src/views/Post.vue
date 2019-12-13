@@ -12,13 +12,17 @@
         label="Input"
         required
     ></v-text-field>
+    <div class="text-center">
+    <v-btn color="green" dark large>Post</v-btn>
+    <v-btn color="#ccff99" dark large>Clear</v-btn>
+    </div>
   </v-container>
 </template>
 
 <script>
   export default {
     data: () => ({
-      items: ['Post', 'Interior', 'Battle', 'Recipe'],
+      items: ['Normal', 'Interior', 'Battle', 'Recipe'],
     }),
   }
 </script>

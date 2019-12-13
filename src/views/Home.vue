@@ -45,8 +45,8 @@ export default {
           },
           {
             id: 2,
-            title: 'recipe02',
-            imgSrc: require('../assets/r-02.jpg')
+            title: 'recipe01',
+            imgSrc: require('../assets/r-01.jpg')
           },
           {
             id: 3,
@@ -70,8 +70,8 @@ export default {
           },
           {
             id: 7,
-            title: 'recipe01',
-            imgSrc: require('../assets/r-01.jpg')
+            title: 'recipe02',
+            imgSrc: require('../assets/r-02.jpg')
           },
           {
             id: 8,
