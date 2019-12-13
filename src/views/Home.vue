@@ -1,11 +1,19 @@
 <template>
   <v-container fluid>
     <v-row dense>
+<<<<<<< HEAD
       <v-col v-for="detail in details" :key="detail.id">
         <v-card>
           <router-link :to="`/detail/${detail.id}`">
             <v-img :src="detail.imgSrc" class="white--text align-end" width="350px" height="300px">
               <v-card-title v-text="detail.title"></v-card-title>
+=======
+        <v-col v-for="photo in photos" :key="photo.id" :photo="photo">
+        <router-link :to="`/photo/${photo.id}`">
+          <v-card>
+              <v-img :src="photo.imgSrc" class="white--text align-end" width="350px" height="300px">
+              <v-card-title v-text="photo.title"></v-card-title>
+>>>>>>> c4586d8b1ad178bab4d760f0f0b88eca8d7aacbd
             </v-img>
           </router-link>
           <v-card-actions>
@@ -30,6 +38,8 @@
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue';
 
+import { db } from '@/main'
+
 export default {
   name: 'home',
   components: {
@@ -37,59 +47,13 @@ export default {
   },
   data: () => {
     return {
-        details: [
-          {
-            id: 1,
-            title: 'interior01',
-            imgSrc: require('../assets/i-01.jpg')
-          },
-          {
-            id: 2,
-            title: 'recipe02',
-            imgSrc: require('../assets/r-02.jpg')
-          },
-          {
-            id: 3,
-            title: 'battle01',
-            imgSrc: require('../assets/b-01.jpg')
-          },
-          {
-            id: 4,
-            title: 'recipe04',
-            imgSrc: require('../assets/r-04.jpg')
-          },
-          {
-            id: 5,
-            title: 'interior03',
-            imgSrc: require('../assets/i-03.jpg')
-          },
-          {
-            id: 6,
-            title: 'battle02',
-            imgSrc: require('../assets/b-02.jpg')
-          },
-          {
-            id: 7,
-            title: 'recipe01',
-            imgSrc: require('../assets/r-01.jpg')
-          },
-          {
-            id: 8,
-            title: 'interior04',
-            imgSrc: require('../assets/i-04.jpg')
-          },
-          {
-            id: 9,
-            title: 'recipe03',
-            imgSrc: require('../assets/r-03.jpg')
-          },
-          {
-            id: 10,
-            title: 'interior02',
-            imgSrc: require('../assets/i-02.jpg')
-          },
-        ]
-      }
+      photos: []
     }
-  }
+  },
+  firestore() {
+    return {
+      photos: db.collection('photos')
+    }
+  }  
+}
 </script>
