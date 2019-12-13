@@ -1,19 +1,13 @@
 <template>
   <v-container fluid>
     <v-row dense>
-<<<<<<< HEAD
-      <v-col v-for="detail in details" :key="detail.id">
-        <v-card>
-          <router-link :to="`/detail/${detail.id}`">
-            <v-img :src="detail.imgSrc" class="white--text align-end" width="350px" height="300px">
-              <v-card-title v-text="detail.title"></v-card-title>
-=======
+
         <v-col v-for="photo in photos" :key="photo.id" :photo="photo">
         <router-link :to="`/photo/${photo.id}`">
           <v-card>
               <v-img :src="photo.imgSrc" class="white--text align-end" width="350px" height="300px">
               <v-card-title v-text="photo.title"></v-card-title>
->>>>>>> c4586d8b1ad178bab4d760f0f0b88eca8d7aacbd
+
             </v-img>
           </router-link>
           <v-card-actions>
