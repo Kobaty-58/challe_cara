@@ -7,7 +7,7 @@
             <v-img :src="detail.imgSrc" class="white--text align-end" width="350px" height="300px">
               <v-card-title v-text="detail.title"></v-card-title>
             </v-img>
-          
+          </router-link>
           <v-card-actions>
             <v-btn icon>
               <v-icon>mdi-heart</v-icon>
@@ -21,7 +21,6 @@
             </v-btn>
           </v-card-actions>
           </v-card>
-          </router-link>
       </v-col>
     </v-row>
   </v-container>

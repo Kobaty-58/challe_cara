@@ -3,25 +3,25 @@
 <v-container fluid>
     <v-row dense>
       <v-col v-for="recipe in recipes" :key="recipe.id">
-        <router-link :to="`/recipe/${recipe.id}`">
-          <v-card>
+        <v-card>
+          <router-link :to="`/recipe/${recipe.id}`">
             <v-img :src="recipe.imgSrc" class="white--text align-end" width="350px" height="300px">
               <v-card-title v-text="recipe.title"></v-card-title>
             </v-img>
-            <v-card-actions>
-              <v-btn icon>
-                <v-icon>mdi-heart</v-icon>
-              </v-btn>
-              <v-btn icon>
-                <v-icon>mdi-bookmark</v-icon>
-              </v-btn>
-              <v-spacer></v-spacer>
-              <v-btn icon>
-                <v-icon>mdi-share-variant</v-icon>
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </router-link>
+          </router-link>
+          <v-card-actions>
+            <v-btn icon>
+              <v-icon>mdi-heart</v-icon>
+            </v-btn>
+            <v-btn icon>
+              <v-icon>mdi-bookmark</v-icon>
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn icon>
+              <v-icon>mdi-share-variant</v-icon>
+            </v-btn>
+          </v-card-actions>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>

@@ -3,12 +3,12 @@
     <router-link :to="'/battle-result-winner'">
     <v-card
       class="mx-auto"
-      color="#0000ff"
+      color="red"
       dark
       max-width="350"
     >
       <v-col>
-        <v-img src="../assets/b-01.jpg">
+        <v-img src="../assets/b-02.jpg">
         <v-card-title class="green--text display-4">Win</v-card-title>
         </v-img>
       </v-col>
@@ -17,16 +17,17 @@
     <router-link :to="'/battle-result-loser'">
     <v-card
       class="mx-auto"
-      color="red"
+      color="blue"
       dark
       max-width="350"
     >
       <v-col>
-        <v-img src="../assets/b-02.jpg">
+        <v-img src="../assets/b-01.jpg">
         <v-card-title class="green--text display-4">Lose</v-card-title>
         </v-img>
       </v-col>
     </v-card>
     </router-link>
+    <v-btn @click="$router.go(-1)" color="green light-1" block height="50" dark class="my-4 display">Back</v-btn>
   </v-container>
 </template>
