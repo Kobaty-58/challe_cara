@@ -12,6 +12,9 @@ import BattleResult from '../views/BattleResult.vue'
 import BattleDetail from '../views/BattleDetail.vue'
 import InBattleBlue from '../views/InBattleBlue.vue'
 import InBattleRed from '../views/InBattleRed.vue'
+import BattleResultWinner from '../views/BattleResultWinner.vue'
+import BattleResultDetail from '../views/BattleResultDetail.vue'
+import BattleResultLoser from '../views/BattleResultLoser.vue'
 
 Vue.use(VueRouter)
 
@@ -72,9 +75,24 @@ const routes = [
     component: InBattleBlue
   },
   {
-    path: '/In-battle-red',
-    name: 'Inbattle-red',
+    path: '/in-battle-red',
+    name: 'inbattle-red',
     component: InBattleRed
+  },
+  {
+    path: '/battle-result-detail',
+    name: 'battle-result-detail',
+    component: BattleResultDetail
+  },
+  {
+    path: '/battle-result-winner',
+    name: 'battle-result-winner',
+    component: BattleResultWinner
+  },
+  {
+    path: '/battle-result-loser',
+    name: 'battle-result-loser',
+    component: BattleResultLoser
   },
   {
     path: '/about',

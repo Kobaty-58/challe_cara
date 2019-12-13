@@ -9,7 +9,7 @@
       </v-col>
     </v-row>
     <v-text-field
-        label="Post"
+        label="Input"
         required
     ></v-text-field>
   </v-container>

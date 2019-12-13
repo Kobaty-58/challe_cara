@@ -14,6 +14,7 @@
       </v-col>
     </v-row>
     <v-col v-for="n of 10" :key="n"><!--とりあえず１０回-->
+    <router-link :to="'/battle-result-detail'">
     <v-card
       class="mx-auto"
       color="#F0F080"
@@ -30,7 +31,8 @@
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title class="green--text display-1 text-center">VS</v-list-item-title>
+          <v-list-item-title class="green--text display-1 text-left">Win</v-list-item-title>
+          <v-list-item-title class="green--text display-1 text-right">Lose</v-list-item-title>
         </v-list-item-content>
 
         <v-list-item-avatar color="grey darken-3">
@@ -44,6 +46,7 @@
       </v-list-item>
     </v-card-actions>
   </v-card>
+    </router-link>
     </v-col>
 </v-container>
 </template>
