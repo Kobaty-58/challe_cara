@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import RecipeDetail from '../views/RecipeDetail.vue'
 import Recipe from '../views/Recipe.vue'
-import Post from '../views/Post.vue'
+//import Post from '../views/Post.vue'
 import Detail from '../views/Detail.vue'
 import Battle from '../views/Battle.vue'
 import Interior from '../views/Interior.vue'
@@ -15,6 +15,8 @@ import InBattleRed from '../views/InBattleRed.vue'
 import BattleResultWinner from '../views/BattleResultWinner.vue'
 import BattleResultDetail from '../views/BattleResultDetail.vue'
 import BattleResultLoser from '../views/BattleResultLoser.vue'
+import Input from '../views/Input.vue'
+import test from '../views/test.vue'
 
 Vue.use(VueRouter)
 
@@ -34,15 +36,20 @@ const routes = [
     name: 'recipe',
     component: Recipe
   },
-  {
-    path: '/post',
-    name: 'post',
-    component: Post
-  },
+  // {
+  //   path: '/post',
+  //   name: 'post',
+  //   component: Post
+  // },
   {
     path: '/detail/:id',
     name: 'detail',
     component: Detail
+  },
+  {
+    path: '/input',
+    name: 'input',
+    component: Input
   },
   {
     path: '/battle',
@@ -78,6 +85,11 @@ const routes = [
     path: '/in-battle-red',
     name: 'inbattle-red',
     component: InBattleRed
+  },
+  {
+    path: '/test',
+    name: 'test',
+    component: test
   },
   {
     path: '/battle-result-detail',

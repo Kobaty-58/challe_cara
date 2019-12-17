@@ -1,5 +1,8 @@
 <template>
-  <v-container fluid>
+<div id="app">
+  <Form></Form>
+</div>
+  <!-- <v-container fluid>
     <v-row align="center">
       <v-col class="d-flex" cols="12" sm="6">
         <v-select
@@ -16,11 +19,15 @@
     <v-btn color="green" dark large>Post</v-btn>
     <v-btn color="#ccff99" dark large>Clear</v-btn>
     </div>
-  </v-container>
+  </v-container> -->
 </template>
 
 <script>
+import Form from '../components/Form.vue'
   export default {
+    components:{
+      Form,
+    },
     data: () => ({
       items: ['Normal', 'Interior', 'Battle', 'Recipe'],
     }),

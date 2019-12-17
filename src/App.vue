@@ -14,7 +14,7 @@
           </v-list-item>
         </router-link>
 
-        <router-link :to="'/post'">
+        <router-link :to="'/input'">
           <v-list-item link>
             <v-list-item-action>
               <v-icon large color="green lighten-1">mdi-pencil</v-icon>
@@ -54,6 +54,17 @@
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Recipe</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </router-link>
+
+        <router-link :to="'/test'">
+          <v-list-item link>
+            <v-list-item-action>
+              <v-icon large color="green lighten-1">mdi-test</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>test</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </router-link>
