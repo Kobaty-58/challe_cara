@@ -29,7 +29,7 @@
             <v-flex xs12 sm8 md4>
               <div v-for="(i,index) in imgUrls" v-bind:key="index">
                 <br>
-                <img :src="i.downloadUrl" height="150">
+                <img :src="i.downloadURL" height="150">
               </div>
             </v-flex>
           </v-layout>
