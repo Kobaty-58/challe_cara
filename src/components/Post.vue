@@ -2,9 +2,10 @@
     <div id="posts-wrapper">
         <hr/>
         <h2>みんなの投稿</h2>
-        <v-btn v-on:click="show_normal_card" variant="outline-primary">Normal</v-btn>
-        <v-btn v-on:click="show_battle_card" variant="outline-primary" style="margin:0px 10px;">Battle</v-btn>
-        <v-btn v-on:click="show_interior_card" variant="outline-primary">Interior</v-btn>
+        <v-btn v-on:click="show_all_card" variant="outline-primary">All</v-btn>
+        <v-btn v-on:click="show_normal_card" variant="outline-primary" style="margin:0px 10px;">Normal</v-btn>
+        <v-btn v-on:click="show_battle_card" variant="outline-primary">Battle</v-btn>
+        <v-btn v-on:click="show_interior_card" variant="outline-primary" style="margin:0px 10px;">Interior</v-btn>
         <v-btn v-on:click="show_recipe_card" variant="outline-primary">Recipe</v-btn>
         <transition-group name="normal-card-transition">
             <v-card
@@ -76,6 +77,7 @@ export default {
     data(){
         return{
             posts:[],
+            card_show_all:true,
             card_show_normal:true,
             card_show_battle:true,
             card_show_interior:true,
@@ -99,6 +101,12 @@ export default {
             }.bind(this));
     },
     methods:{
+        show_all_card:function(){
+            this.card_show_normal=true;
+            this.card_show_battle=true;
+            this.card_show_interior=true;
+            this.card_show_recipe=true;
+        },
         show_normal_card:function(){
             this.card_show_normal=true;
             this.card_show_battle=false;

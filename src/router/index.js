@@ -17,6 +17,7 @@ import BattleResultDetail from '../views/BattleResultDetail.vue'
 import BattleResultLoser from '../views/BattleResultLoser.vue'
 import Input from '../views/Input.vue'
 import test from '../views/test.vue'
+import phototest from '../views/phototest.vue'
 
 Vue.use(VueRouter)
 
@@ -90,6 +91,11 @@ const routes = [
     path: '/test',
     name: 'test',
     component: test
+  },
+  {
+    path: '/phototest',
+    name: 'phototest',
+    component: phototest
   },
   {
     path: '/battle-result-detail',
