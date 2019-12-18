@@ -148,14 +148,14 @@ export default {
       mountainsRef.put(this.imageFile).then(snapshot => {
         snapshot.ref.getDownloadURL().then(downloadURL => {
           this.imageUrl = downloadURL;
-          const bucketName = "image-upload-62ed7.appspot.com";
-          const filePath = this.imageName;
+          // const bucketName = "image-upload-62ed7.appspot.com";
+          // const filePath = this.imageName;
           db.collection("images").add({
             downloadURL,
-            downloadUrl:
-              `https://firebasestorage.googleapis.com/v0/b/${bucketName}/o/images` +
-              "%2F" +
-              `${encodeURIComponent(filePath)}?alt=media`,
+            // downloadUrl:
+            //   `https://firebasestorage.googleapis.com/v0/b/${bucketName}/o/images` +
+            //   "%2F" +
+            //   `${encodeURIComponent(filePath)}?alt=media`,
             timestamp: Date.now()
           });
           this.getImages();
