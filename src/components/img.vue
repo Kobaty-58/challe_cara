@@ -19,28 +19,28 @@
                 @change="onFilePicked"
               >
 
-              <v-btn color="primary" @click="upload">アップロード</v-btn>
+              <!-- <v-btn color="primary" @click="upload">アップロード</v-btn> -->
             </v-flex>
           </v-layout>
 
-          <br>
+          <!-- <br> -->
 
-          <v-layout align-center justify-center>
+          <!-- <v-layout align-center justify-center>
             <v-flex xs12 sm8 md4>
               <div v-for="(i,index) in imgUrls" v-bind:key="index">
                 <br>
                 <img :src="i.downloadURL" height="150">
               </div>
             </v-flex>
-          </v-layout>
+          </v-layout> -->
         </v-container>
       </v-content>
   </div>
 </template>
 
 <script>
-//import firebase from 'firebase'
-//import { db } from "../main.js";
+import firebase from 'firebase'
+import { db } from "../main.js";
 
 export default {
     name: "App",
@@ -59,21 +59,21 @@ export default {
     this.getImages();
   },
   methods: {
-    // getImages: function() {
-    //   db.collection("images")
-    //     .get()
-    //     .then(snap => {
-    //       const array = [];
-    //       snap.forEach(doc => {
-    //         array.push(doc.data());
-    //       });
-    //       this.imgUrls = array;
-    //     });
+    getImages: function() {
+      db.collection("images")
+        .get()
+        .then(snap => {
+          const array = [];
+          snap.forEach(doc => {
+            array.push(doc.data());
+          });
+          this.imgUrls = array;
+        });
 
-    //   this.imageName = "";
-    //   this.imageFile = "";
-    //   this.imageUrl = "";
-    // },
+      this.imageName = "";
+      this.imageFile = "";
+      this.imageUrl = "";
+    },
 
     pickFile() {
       this.$refs.image.click();
@@ -99,24 +99,24 @@ export default {
       }
     },
 
-    // //画像アップロード処理
-    // upload: function() {
-    //   // ストレージオブジェクト作成
-    //   var storageRef = firebase.storage().ref();
-    //   // ファイルのパスを設定
-    //   var mountainsRef = storageRef.child(`posted_data/${this.imageName}`);
-    //   // ファイルを適用してファイルアップロード開始
-    //   mountainsRef.put(this.imageFile).then(snapshot => {
-    //     snapshot.ref.getDownloadURL().then(downloadURL => {
-    //       this.imageUrl = downloadURL;
-    //       db.collection("posted_data").add({
-    //         downloadURL,
-    //         timestamp: Date.now()
-    //       });
-    //       this.getImages();
-    //     });
-    //   });
-    // }
+    //画像アップロード処理
+    upload: function() {
+      // ストレージオブジェクト作成
+      var storageRef = firebase.storage().ref();
+      // ファイルのパスを設定
+      var mountainsRef = storageRef.child(`images/${this.imageName}`);
+      // ファイルを適用してファイルアップロード開始
+      mountainsRef.put(this.imageFile).then(snapshot => {
+        snapshot.ref.getDownloadURL().then(downloadURL => {
+          this.imageUrl = downloadURL;
+          db.collection("images").add({
+            downloadURL,
+            timestamp: Date.now()
+          });
+          this.getImages();
+        });
+      });
+    }
   },
   components: {}
 };

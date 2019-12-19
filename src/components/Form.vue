@@ -35,6 +35,28 @@
                 required
                 ></v-select>
             </v-form>
+
+            <v-layout align-center justify-center>
+            <v-flex xs12 sm8 md4>
+              <img :src="form_data.imageUrl" height="150" v-if="form_data.imageUrl">
+              <v-text-field
+                label="Select Image"
+                @click="pickFile"
+                v-model="form_data.imageName"
+                prepend-icon="mdi-file"
+              ></v-text-field>
+              <input
+                type="file"
+                style="display: none"
+                ref="image"
+                accept="image/*"
+                @change="onFilePicked"
+              >
+
+            </v-flex>
+          </v-layout>
+
+
             <v-form
             id="input-group-cont"
             >
@@ -54,16 +76,28 @@
 </template>
 
 <script>
-import firebase from 'firebase'
+import firebase from 'firebase';
+//import Imge from '../components/img.vue';
+import { db } from "../main.js";
 
 export default {
   name: 'form-wrapper',
+  components:{
+    //Imge
+  },
   data() {
     return {
     form_data: {
       name: '',
-      cont_type: 'news',
+      cont_type: '',
       cont: '',
+      photo: null,
+      photo_url: null,
+      dialog: false,
+      imageName: "",
+      imageUrl: "",
+      imageFile: "",
+      imgUrls: []
     },
     cont_types: [{ text: 'Normal', value: 'normal'}, { text: 'Battle', value: 'battle'},{ text: 'Interior', value: 'interior'},{ text: 'Recipe', value: 'recipe'}],
     id_last: '0',
@@ -73,20 +107,53 @@ export default {
     card_form_cont: true
     }
   },
-  created:
-  function() {
-    firebase.firestore().collection("posted_data").get().then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-
-          if (Number(doc.data().id) > Number(this.id_last)){
-            this.id_last = doc.data().id
-          }
-
-        }.bind(this));
-    }.bind(this));
-  },
   methods: {
+    getImages: function() {
+      db.collection("postdata")
+        .get()
+        .then(snap => {
+          const array = [];
+          snap.forEach(doc => {
+            array.push(doc.data());
+          });
+          this.imgUrls = array;
+        });
+
+      this.form_data.imageName = "";
+      this.imageFile = "";
+      this.form_data.imageUrl = "";
+    },
+
+    pickFile() {
+      this.$refs.image.click();
+    },
+
+    onFilePicked(e) {
+      const files = e.target.files;
+      if (files[0] !== undefined) {
+        this.form_data.imageName = files[0].name;
+        if (this.form_data.imageName.lastIndexOf(".") <= 0) {
+          return;
+        }
+        const fr = new FileReader();
+        fr.readAsDataURL(files[0]);
+        fr.addEventListener("load", () => {
+          this.form_data.imageUrl = fr.result;
+          this.imageFile = files[0]; // this is an image file that can be sent to server...
+        });
+      } else {
+        this.form_data.imageName = "";
+        this.imageFile = "";
+        this.form_data.imageUrl = "";
+      }
+    },
+
     submit_form: function() {
+      // ストレージオブジェクト作成
+      var storageRef = firebase.storage().ref();
+      // ファイルのパスを設定
+      var mountainsRef = storageRef.child(`postdata/${this.form_data.imageName}`);
+
       if (this.form_data.name=='' || this.form_data.cont==''){
         this.post_validation = true;
         setTimeout(function(){this.post_validation = false;}.bind(this), 2000);
@@ -95,15 +162,23 @@ export default {
 
       this.id_last = String( Number(this.id_last) + 1 );
 
-      firebase.firestore().collection("posted_data").add({
-          id: this.id_last,
-          name: this.form_data.name.trim(),
-          cont_type: this.form_data.cont_type.trim(),
-          cont: this.form_data.cont.trim()
+      mountainsRef.put(this.imageFile).then(snapshot => {
+        snapshot.ref.getDownloadURL().then(downloadURL => {
+          this.form_data.imageUrl = downloadURL;
+          db.collection("postdata").add({
+            id: this.id_last,
+            name: this.form_data.name,
+            cont_type: this.form_data.cont_type,
+            downloadURL: this.form_data.downloadURL,
+            cont: this.form_data.cont,
+            timestamp: Date.now
+          });
+          this.getImages();
+        });
       });
 
       this.form_data.name = ''
-      this.form_data.cont_type = 'news'
+      this.form_data.cont_type = ''
       this.form_data.cont= ''
 
       this.card_form_cont = false;
@@ -113,8 +188,9 @@ export default {
 
       this.post_message = true;
       setTimeout(function(){this.post_message = false;}.bind(this), 2000);
-    }
-  }
+    },
+    
+  },
 }
 
 </script>
