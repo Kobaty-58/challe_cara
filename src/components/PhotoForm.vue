@@ -39,8 +39,8 @@
 </template>
 
 <script>
-//import firebase from 'firebase'
-//import { db } from "../main.js";
+import firebase from 'firebase'
+import { db } from "../main.js";
 
 export default {
     name: "App",
