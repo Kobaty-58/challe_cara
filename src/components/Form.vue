@@ -35,6 +35,28 @@
                 required
                 ></v-select>
             </v-form>
+
+            <v-layout align-center justify-center>
+            <v-flex xs12 sm8 md4>
+              <img :src="imageUrl" height="150" v-if="imageUrl">
+              <v-text-field
+                label="Select Image"
+                @click="pickFile"
+                v-model="imageName"
+                prepend-icon="mdi-file"
+              ></v-text-field>
+              <input
+                type="file"
+                style="display: none"
+                ref="image"
+                accept="image/*"
+                @change="onFilePicked"
+              >
+
+            </v-flex>
+          </v-layout>
+
+
             <v-form
             id="input-group-cont"
             >
@@ -49,22 +71,34 @@
             </v-form>
         </v-card-text>
     </v-card>
-    <v-btn v-on:click='submit_form' variant="outline-success" color="green" dark large>送信</v-btn>
+    <v-btn variant="outline-success" color="green"  v-on:click='upload' dark large>送信</v-btn>
   </div>
 </template>
 
 <script>
-import firebase from 'firebase'
+import firebase from 'firebase';
+//import Imge from '../components/img.vue';
+import { db } from "../main.js";
 
 export default {
   name: 'form-wrapper',
+  components:{
+    //Imge
+  },
   data() {
     return {
     form_data: {
       name: '',
-      cont_type: 'news',
+      cont_type: '',
       cont: '',
     },
+    photo: null,
+    photo_url: null,
+    dialog: false,
+    imageName: "",
+    imageUrl: "",
+    imageFile: "",
+    imgUrls: [],
     cont_types: [{ text: 'Normal', value: 'normal'}, { text: 'Battle', value: 'battle'},{ text: 'Interior', value: 'interior'},{ text: 'Recipe', value: 'recipe'}],
     id_last: '0',
     post_message: false,
@@ -73,48 +107,96 @@ export default {
     card_form_cont: true
     }
   },
-  created:
-  function() {
-    firebase.firestore().collection("posted_data").get().then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-
-          if (Number(doc.data().id) > Number(this.id_last)){
-            this.id_last = doc.data().id
-          }
-
-        }.bind(this));
-    }.bind(this));
+  created() {
+    this.getImages();
   },
   methods: {
-    submit_form: function() {
+    getImages: function() {
+      db.collection("postdata")
+        .get()
+        .then(snap => {
+          const array = [];
+          snap.forEach(doc => {
+            array.push(doc.data());
+          });
+          this.imgUrls = array;
+        });
+
+      this.imageName = "";
+      this.imageFile = "";
+      this.imageUrl = "";
+    },
+
+    pickFile() {
+      this.$refs.image.click();
+    },
+
+    onFilePicked(e) {
+      const files = e.target.files;
+      if (files[0] !== undefined) {
+        this.imageName = files[0].name;
+        if (this.imageName.lastIndexOf(".") <= 0) {
+          return;
+        }
+        const fr = new FileReader();
+        fr.readAsDataURL(files[0]);
+        fr.addEventListener("load", () => {
+          this.imageUrl = fr.result;
+          this.imageFile = files[0]; // this is an image file that can be sent to server...
+        });
+      } else {
+        this.imageName = "";
+        this.imageFile = "";
+        this.imageUrl = "";
+      }
+    },
+    upload: function() {
+      // ストレージオブジェクト作成
+      var storageRef = firebase.storage().ref();
+      // ファイルのパスを設定
+      var mountainsRef = storageRef.child(`images/${this.imageName}`);
+
       if (this.form_data.name=='' || this.form_data.cont==''){
         this.post_validation = true;
         setTimeout(function(){this.post_validation = false;}.bind(this), 2000);
         return
       }
-
       this.id_last = String( Number(this.id_last) + 1 );
+      // ファイルを適用してファイルアップロード開始
+      mountainsRef.put(this.imageFile).then(snapshot => {
+        snapshot.ref.getDownloadURL().then(downloadURL => {
+          this.imageUrl = downloadURL;
+          // const time = Date.now().toString;
+          db.collection("postdata").add({     
+            id: this.id_last,
+            name: this.form_data.name.trim(),
+            cont_type: this.form_data.cont_type.trim(),
+            cont: this.form_data.cont.trim(),       
+            downloadURL,
+            timestamp: Date.now()
+          });
+          this.form_data.name = ''
+          this.form_data.cont= ''
+          this.form_data.cont_type = 'news'
 
-      firebase.firestore().collection("posted_data").add({
-          id: this.id_last,
-          name: this.form_data.name.trim(),
-          cont_type: this.form_data.cont_type.trim(),
-          cont: this.form_data.cont.trim()
+          this.card_form_cont = false;
+          this.spinner = true;
+          setTimeout(function(){this.card_form_cont = true}.bind(this), 700);
+          setTimeout(function(){this.spinner = false;}.bind(this), 700);
+
+          this.post_message = true;
+          setTimeout(function(){this.post_message = false;}.bind(this), 2000);
+
+          this.getImages();
+        });
       });
 
-      this.form_data.name = ''
-      this.form_data.cont_type = 'news'
-      this.form_data.cont= ''
-
-      this.card_form_cont = false;
-      this.spinner = true;
-      setTimeout(function(){this.card_form_cont = true}.bind(this), 700);
-      setTimeout(function(){this.spinner = false;}.bind(this), 700);
+      
 
       this.post_message = true;
       setTimeout(function(){this.post_message = false;}.bind(this), 2000);
-    }
-  }
+    },
+  },
 }
 
 </script>
